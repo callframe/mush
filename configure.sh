@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 BY="${BASH_SOURCE[0]}"
 work_directory="$(realpath "$(dirname "$BY")")"
 cd "$work_directory" || echo "work directory not found"
