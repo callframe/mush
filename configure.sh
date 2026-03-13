@@ -1,5 +1,16 @@
 #!/bin/bash
 
+BY="${BASH_SOURCE[0]}"
+work_directory="$(realpath "$(dirname "$BY")")"
+cd "$work_directory" || echo "work directory not found"
+
+sources=(
+  "$work_directory/mush.c"
+)
+OBJECTS=(${sources[@]%.c}.o)
+MUSH="$work_directory/mush"
+
+## helpers and tools
 sed="sed"
 
 check_defined() {
@@ -12,19 +23,22 @@ replace_str() {
   printf -- '-e s|@%s@|%s|g' "$ref" "${!ref}"
 }
 
-work_directory="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
-cd "$work_directory" || echo "work directory not found"
-
-# include configurations and tools
+## include configurations and tools
 config_sh="$work_directory/config.sh"
 source "$config_sh" || echo "config.sh is missing"
 
 check_defined CC
+check_defined RM
 
-# makefile to produce
+## makefile sources and generation
 makefile_in="$work_directory/makefile.in"
 makefile="$work_directory/makefile"
 
 "$sed" \
+  "$(replace_str BY)" \
+  "$(replace_str BASH)" \
+  "$(replace_str RM)" \
   "$(replace_str CC)" \
+  "$(replace_str OBJECTS)" \
+  "$(replace_str MUSH)" \
   "$makefile_in" > "$makefile"

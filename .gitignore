@@ -1,2 +1,7 @@
 config.sh
 makefile
+/mush
+*.o
+*.out
+*.d
+.cache/
