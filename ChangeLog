@@ -1,6 +1,8 @@
 2026-03-13  Fabrice  <fabrice@schaub-dev.xyz>
 
- * interduce self written changelog generator (4fa7873)
+ * use env first approach for git variable in changelog (c18f232)
+ * update readme (04b7ecc)
+ * interduce self written changelog generator (941e50a)
  * fixing cliff (84c6b54)
  * generating initial build steps (ab3982e)
  * initial setup of the build system (e99c650)
