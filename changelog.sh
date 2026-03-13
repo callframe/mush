@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GIT="git"
+GIT="${GIT:-git}"
 pattern='%ad%x09%an%x09%ae%x09%s%x09%h'
 prev_key=""
 
