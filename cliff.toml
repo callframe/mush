@@ -1,12 +1,12 @@
 [changelog]
 header = ""
 body = """
-{% for group, commits in commits | group_by(attribute="author.name") %}
+{% for author, commits in commits | group_by(attribute="author.name") %}
+{{ commits[0].author.timestamp | date(format="%Y-%m-%d") }}  {{ author }}  <{{ commits[0].author.email }}>
 {% for commit in commits %}
-{{ commit.author.timestamp | date(format="%Y-%m-%d") }}  {{ commit.author.name }}  <{{ commit.author.email }}>
-
 \t* {{ commit.message | trim }} ({{ commit.id | truncate(length=7, end="") }})
 {% endfor %}
+
 {% endfor %}
 """
 footer = ""
@@ -16,3 +16,4 @@ trim = true
 conventional_commits = false
 filter_unconventional = false
 split_commits = false
+sort_commits = "oldest"
