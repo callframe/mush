@@ -4,13 +4,9 @@ set -euo pipefail
 
 BY="${BASH_SOURCE[0]}"
 work_directory="$(realpath "$(dirname "$BY")")"
-cd "$work_directory" || echo "work directory not found"
+cd "$work_directory"
 
-sources=(
-  "$work_directory/mush.c"
-)
-OBJECTS=(${sources[@]%.c}.o)
-MUSH="$work_directory/mush"
+WORK_DIR="$work_directory"
 
 ## helpers and tools
 sed="sed"
@@ -27,7 +23,7 @@ replace_str() {
 
 ## include configurations and tools
 config_sh="$work_directory/config.sh"
-source "$config_sh" || echo "config.sh is missing"
+source "$config_sh"
 
 check_defined CC
 check_defined RM
@@ -41,6 +37,5 @@ makefile="$work_directory/makefile"
   "$(replace_str BASH)" \
   "$(replace_str RM)" \
   "$(replace_str CC)" \
-  "$(replace_str OBJECTS)" \
-  "$(replace_str MUSH)" \
+  "$(replace_str WORK_DIR)" \
   "$makefile_in" > "$makefile"

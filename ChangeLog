@@ -1,5 +1,8 @@
 2026-03-13  Fabrice  <fabrice@schaub-dev.xyz>
 
+ * adds mimalloc (d7b290f)
+ * remove unnecessary error swallowing in configure.sh (3dbe00b)
+ * regenerate changelog (25dc8e3)
  * use env first approach for git variable in changelog (c18f232)
  * update readme (04b7ecc)
  * interduce self written changelog generator (941e50a)
