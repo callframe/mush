@@ -1,0 +1,4 @@
+CC = @CC@
+CC_FLAGS = -std=c11 \
+	-Wall -Wextra -Werror -pedantic
+
