@@ -1,5 +1,11 @@
+2026-03-14  Fabrice  <fabrice@schaub-dev.xyz>
+
+ * working on figuring out the whole line editing and process part (4ec162f)
+ * adds release/debug builds and enables xmalloc (bb4a458)
+
 2026-03-13  Fabrice  <fabrice@schaub-dev.xyz>
 
+ * fixes changelog (b64bec4)
  * adds mimalloc and cleans up configure.sh as well as makefile.in (e988bbd)
  * regenerate changelog (25dc8e3)
  * use env first approach for git variable in changelog (c18f232)
