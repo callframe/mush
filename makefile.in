@@ -23,7 +23,8 @@ LD_FLAGS =
 
 ## Sources and objects
 SOURCES = \
-	$(WORK_DIR)/mush.c
+	$(WORK_DIR)/mush.c \
+	$(WORK_DIR)/mu-le.c
 
 OBJECTS = $(SOURCES:.c=.o)
 DEPENDS = $(OBJECTS:.o=.d)
@@ -49,6 +50,7 @@ endif
 all: $(MUSH)
 
 $(MI_OBJECT): CC_FLAGS += $(MI_CC_FLAGS)
+$(OBJECTS): CC_FLAGS += -I$(WORK_DIR)
 
 $(MUSH): $(OBJECTS) $(MI_OBJECT)
 	$(CC) -o $@ $^ $(LD_FLAGS)
