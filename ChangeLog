@@ -1,5 +1,11 @@
+2026-03-15  Fabrice  <fabrice@schaub-dev.xyz>
+
+ * formatting codebase (3993b22)
+ * adds terminal mode switching and formatting (4297aeb)
+
 2026-03-14  Fabrice  <fabrice@schaub-dev.xyz>
 
+ * updating changelog (59891e6)
  * working on figuring out the whole line editing and process part (4ec162f)
  * adds release/debug builds and enables xmalloc (bb4a458)
 

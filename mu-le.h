@@ -1,12 +1,15 @@
 #pragma once
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <termios.h>
 
+#define DISPLAY_FILE STDIN_FILENO
+
 struct display {
-  uintptr_t width, height;
-  uintptr_t cur_x, cur_y;
-  struct termios state;
+  struct termios original;
+  struct termios raw;
 };
 
-struct display* mu_display(void);
+bool mu_display_raw(void);
+bool mu_display_canon(void);
