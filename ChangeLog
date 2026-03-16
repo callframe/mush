@@ -1,7 +1,10 @@
+2026-03-16  Fabrice  <fabrice@schaub-dev.xyz>
+
+ * implementes expanding array and working on line editing (074fa68)
+
 2026-03-15  Fabrice  <fabrice@schaub-dev.xyz>
 
- * formatting codebase (3993b22)
- * adds terminal mode switching and formatting (4297aeb)
+ * adds terminal mode switching and formatting (7c20246)
 
 2026-03-14  Fabrice  <fabrice@schaub-dev.xyz>
 

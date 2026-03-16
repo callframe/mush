@@ -24,7 +24,8 @@ LD_FLAGS =
 ## Sources and objects
 SOURCES = \
 	$(WORK_DIR)/mush.c \
-	$(WORK_DIR)/mu-le.c
+	$(WORK_DIR)/mu-le.c \
+	$(WORK_DIR)/mu-array.c
 
 OBJECTS = $(SOURCES:.c=.o)
 DEPENDS = $(OBJECTS:.o=.d)
@@ -39,7 +40,7 @@ ifeq ($(RELEASE),0)
 	CC_FLAGS += -g3 -O0
 	MI_CC_FLAGS += -DMI_DEBUG=2
 else
-	CC_FLAGS += -O2 -flto=auto
+	CC_FLAGS += -O2 -flto=auto -DNDEBUG
 	LD_FLAGS += -flto=auto
 	MI_CC_FLAGS += -DMI_DEBUG=0 \
 		-Wno-unused-parameter -Wno-unused-but-set-variable
