@@ -9,17 +9,39 @@ MI_DIR = $(WORK_DIR)/mimalloc
 MI_SRC_DIR = $(MI_DIR)/src
 MI_INC_DIR = $(MI_DIR)/include
 
+NC_DIR = $(WORK_DIR)/ncurses
+NC_LIB_DIR = $(NC_DIR)/lib
+NC_CONFIGURE_AC = $(NC_DIR)/configure.in
+NC_CONFIGURE_SH = $(NC_DIR)/configure
+NC_CONFIGURE_FLAGS = \
+	--with-termlib \
+	--without-cxx \
+	--without-cxx-binding \
+	--without-ada \
+	--without-manpages \
+	--without-progs \
+	--without-tests
+	
+NC_MAKEFILE = $(NC_DIR)/Makefile
+NC_TINFO = $(NC_LIB_DIR)/libtinfow.a
+
 MUSH = $(WORK_DIR)/mush
 
 ## Binaries and flags
+CD = cd
+BASH = @BASH@
 RM = @RM@
 CC = @CC@
+RANLIB = @RANLIB@
+AUTORECONF = @AUTORECONF@
 
 CC_FLAGS = -std=c17 \
 	-Wall -Wextra -Werror -pedantic \
 	-MMD -MP
 
 LD_FLAGS =
+
+AUTORECONF_FLAGS = -fi
 
 ## Sources and objects
 SOURCES = \
@@ -53,7 +75,16 @@ all: $(MUSH)
 $(MI_OBJECT): CC_FLAGS += $(MI_CC_FLAGS)
 $(OBJECTS): CC_FLAGS += -I$(WORK_DIR)
 
-$(MUSH): $(OBJECTS) $(MI_OBJECT)
+$(NC_CONFIGURE_SH): $(NC_CONFIGURE_AC)
+	$(AUTORECONF) $(AUTORECONF_FLAGS)
+
+$(NC_MAKEFILE): $(NC_CONFIGURE_SH)
+	$(CD) $(NC_DIR) && CC=$(CC) RANLIB=$(RANLIB) $(BASH) $(NC_CONFIGURE_SH) $(NC_CONFIGURE_FLAGS)
+
+$(NC_TINFO): $(NC_MAKEFILE)
+	$(MAKE) -C $(NC_DIR) libs
+
+$(MUSH): $(OBJECTS) $(MI_OBJECT) $(NC_TINFO)
 	$(CC) -o $@ $^ $(LD_FLAGS)
 
 %.o: %.c
@@ -63,5 +94,6 @@ $(MUSH): $(OBJECTS) $(MI_OBJECT)
 clean:
 	$(RM) $(DEPENDS) $(OBJECTS) $(MUSH)
 	$(RM) $(MI_DEPEND) $(MI_OBJECT)
+	$(MAKE) -C $(NC_DIR) distclean
 
 -include $(DEPENDS) $(MI_DEPEND)

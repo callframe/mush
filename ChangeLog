@@ -1,6 +1,7 @@
 2026-03-16  Fabrice  <fabrice@schaub-dev.xyz>
 
- * implementes expanding array and working on line editing (074fa68)
+ * adds ncurses and links against it (0654ef1)
+ * implementes expanding array and working on line editing (67720f5)
 
 2026-03-15  Fabrice  <fabrice@schaub-dev.xyz>
 

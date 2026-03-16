@@ -2,3 +2,6 @@
 	path = mimalloc
 	url = https://github.com/microsoft/mimalloc.git
 	branch = dev3
+[submodule "ncurses"]
+	path = ncurses
+	url = https://github.com/ThomasDickey/ncurses-snapshots.git

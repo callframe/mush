@@ -23,6 +23,7 @@ struct display* mu_display(void) {
   struct display display = {
       .original = original,
       .raw = raw,
+      .lines = {0},
   };
 
   DISPLAY = display;

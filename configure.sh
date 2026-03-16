@@ -27,6 +27,8 @@ source "$config_sh"
 
 check_defined CC
 check_defined RM
+check_defined RANLIB
+check_defined AUTORECONF
 
 ## makefile sources and generation
 makefile_in="$work_directory/makefile.in"
@@ -36,6 +38,8 @@ makefile="$work_directory/makefile"
   "$(replace_str BY)" \
   "$(replace_str BASH)" \
   "$(replace_str RM)" \
+  "$(replace_str RANLIB)" \
   "$(replace_str CC)" \
+  "$(replace_str AUTORECONF)" \
   "$(replace_str WORK_DIR)" \
   "$makefile_in" > "$makefile"
