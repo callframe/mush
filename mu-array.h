@@ -11,6 +11,7 @@ struct array {
   uintptr_t count, capacity;
 };
 
+void array_deinit(struct array* array);
 void array_resize(struct array* array, uintptr_t new_capacity);
 void array_push(struct array* array, void* items, uintptr_t nitems);
 void* array_at(const struct array* array, uintptr_t n);

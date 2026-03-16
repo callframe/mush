@@ -10,8 +10,9 @@
 struct display {
   struct termios original;
   struct termios raw;
-  struct array lines;
+  struct array history;
 };
 
 bool mu_display_raw(void);
 bool mu_display_canon(void);
+void mu_display_deinit(void);

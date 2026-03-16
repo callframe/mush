@@ -1,6 +1,7 @@
 #include "mu-le.h"
-
+#include <string.h>
 #include <unistd.h>
+#include "term.h"
 
 #define MU_DISPLAY_CFLAGS (~(ICANON | ECHO))
 #define MU_DISPLAY_IFLAGS (~IXON)
@@ -10,6 +11,7 @@ static bool DISPLAY_INIT = false;
 
 struct display* mu_display(void) {
   if (DISPLAY_INIT) return &DISPLAY;
+  if (setupterm(NULL, DISPLAY_FILE, NULL) != -1) return NULL;
 
   struct termios original;
   if (tcgetattr(DISPLAY_FILE, &original) == -1) return NULL;
@@ -23,7 +25,7 @@ struct display* mu_display(void) {
   struct display display = {
       .original = original,
       .raw = raw,
-      .lines = {0},
+      .history = {0},
   };
 
   DISPLAY = display;
@@ -41,4 +43,15 @@ bool mu_display_canon(void) {
   const struct display* display = mu_display();
   if (!display) return false;
   return tcsetattr(DISPLAY_FILE, TCSANOW, &display->original) != -1;
+}
+
+void mu_display_deinit(void){
+  struct display* display = mu_display();
+  if(!display) return;
+
+  array_deinit(&display->history);
+  del_curterm(cur_term);
+
+  memset(&DISPLAY, 0, sizeof(struct display));
+  DISPLAY_INIT = false;
 }

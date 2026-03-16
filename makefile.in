@@ -11,6 +11,7 @@ MI_INC_DIR = $(MI_DIR)/include
 
 NC_DIR = $(WORK_DIR)/ncurses
 NC_LIB_DIR = $(NC_DIR)/lib
+NC_INC_DIR = $(NC_DIR)/include
 NC_CONFIGURE_AC = $(NC_DIR)/configure.in
 NC_CONFIGURE_SH = $(NC_DIR)/configure
 NC_CONFIGURE_FLAGS = \
@@ -73,7 +74,7 @@ endif
 all: $(MUSH)
 
 $(MI_OBJECT): CC_FLAGS += $(MI_CC_FLAGS)
-$(OBJECTS): CC_FLAGS += -I$(WORK_DIR)
+$(OBJECTS): CC_FLAGS += -I$(WORK_DIR) -I$(NC_INC_DIR) -I$(MI_INC_DIR)
 
 $(NC_CONFIGURE_SH): $(NC_CONFIGURE_AC)
 	$(AUTORECONF) $(AUTORECONF_FLAGS)

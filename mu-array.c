@@ -19,6 +19,15 @@ static void array_checked_resize(struct array* array, uintptr_t additional) {
   array_resize(array, new_capacity);
 }
 
+void array_deinit(struct array* array){
+  assert(array != NULL);
+
+  if(array->elems == NULL) return;
+
+  mi_free(array->elems);
+  memset(array, 0, sizeof(struct array));
+}
+
 void array_resize(struct array* array, uintptr_t new_capacity) {
   assert(array != NULL);
   assert(array->count < new_capacity);

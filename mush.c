@@ -9,4 +9,6 @@ int main(void) {
 
   ret = mu_display_canon();
   if (!ret) fprintf(stdout, "failed to put terminal back into canon\n");
+
+  mu_display_deinit();
 }
